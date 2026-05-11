@@ -19,29 +19,49 @@
     <h1>🎵 AIGAANE V3 PRO</h1>
     <div class="card">
         <h2>🎯 Raga Recommendation</h2>
-        <select id="rasa"><option>Shringara</option><option>Karuna</option><option>Shanti</option><option>Veera</option></select>
-        <select id="samay"><option>Any</option><option>Night</option><option>Dawn</option><option>Morning</option><option>Evening</option></select>
-        <button onclick="getRec()">Get Recommendation</button>
+        <select id="rasa">
+            <option value="Shringara">💖 Shringara (Romantic)</option>
+            <option value="Karuna">😢 Karuna (Pathos/Grief)</option>
+            <option value="Shanti">🕊️ Shanti (Peace)</option>
+            <option value="Veera">⚔️ Veera (Courage)</option>
+        </select>
+        <select id="samay">
+            <option value="Any">Any Time</option>
+            <option value="Night">🌙 Night</option>
+            <option value="Dawn">🌅 Dawn</option>
+            <option value="Morning">🌄 Morning</option>
+        </select>
+        <button onclick="getRecommendation()">🔮 Get Recommendation</button>
         <div id="result" class="result"></div>
     </div>
 </div>
 <script>
-async function getRec(){
-    const rasa=document.getElementById('rasa').value;
-    const samay=document.getElementById('samay').value;
-    const res=await fetch('/api/recommend',{
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({intent_rasa:rasa,samay:samay})
-    });
-    const data=await res.json();
-    document.getElementById('result').innerHTML=data.recommendations.map(r=>`
-        <div class="raga-item">
-            <div class="raga-name">🎵 ${r.raga}</div>
-            <div>${r.rasa} | ${r.samay}</div>
-            <div>${r.therapeutic}</div>
-        </div>
-    `).join('');
+async function getRecommendation() {
+    const rasa = document.getElementById('rasa').value;
+    const samay = document.getElementById('samay').value;
+    const resultDiv = document.getElementById('result');
+    resultDiv.innerHTML = 'Loading...';
+    try {
+        const response = await fetch('/api/recommend', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ intent_rasa: rasa, samay: samay })
+        });
+        const data = await response.json();
+        if (data.recommendations && data.recommendations.length > 0) {
+            resultDiv.innerHTML = data.recommendations.map(r => `
+                <div class="raga-item">
+                    <div class="raga-name">🎵 ${r.raga}</div>
+                    <div>${r.rasa} | ${r.samay}</div>
+                    <div>${r.therapeutic}</div>
+                </div>
+            `).join('');
+        } else {
+            resultDiv.innerHTML = 'No recommendations found';
+        }
+    } catch(e) {
+        resultDiv.innerHTML = 'Error: ' + e.message;
+    }
 }
 </script>
 </body>
