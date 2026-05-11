@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Aigaane V3 PRO</title>
+    <style>
+        body{background:linear-gradient(135deg,#1a1a2e,#16213e);color:white;font-family:Arial;padding:20px}
+        .container{max-width:1200px;margin:0 auto}
+        h1{text-align:center;color:#4ecdc4}
+        .card{background:rgba(255,255,255,0.1);border-radius:15px;padding:20px;margin:20px 0}
+        select,button{padding:10px;margin:5px;border-radius:8px;background:rgba(255,255,255,0.2);color:white;cursor:pointer}
+        button{background:#4ecdc4;color:#1a1a2e;font-weight:bold}
+        .result{background:rgba(0,0,0,0.5);border-radius:10px;padding:15px;margin-top:15px}
+        .raga-item{background:rgba(78,205,196,0.2);padding:10px;margin:5px;border-radius:8px}
+        .raga-name{font-size:1.2em;font-weight:bold;color:#4ecdc4}
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>🎵 AIGAANE V3 PRO</h1>
+    <div class="card">
+        <h2>🎯 Raga Recommendation</h2>
+        <select id="rasa"><option>Shringara</option><option>Karuna</option><option>Shanti</option><option>Veera</option></select>
+        <select id="samay"><option>Any</option><option>Night</option><option>Dawn</option><option>Morning</option><option>Evening</option></select>
+        <button onclick="getRec()">Get Recommendation</button>
+        <div id="result" class="result"></div>
+    </div>
+</div>
+<script>
+async function getRec(){
+    const rasa=document.getElementById('rasa').value;
+    const samay=document.getElementById('samay').value;
+    const res=await fetch('/api/recommend',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({intent_rasa:rasa,samay:samay})
+    });
+    const data=await res.json();
+    document.getElementById('result').innerHTML=data.recommendations.map(r=>`
+        <div class="raga-item">
+            <div class="raga-name">🎵 ${r.raga}</div>
+            <div>${r.rasa} | ${r.samay}</div>
+            <div>${r.therapeutic}</div>
+        </div>
+    `).join('');
+}
+</script>
+</body>
+</html>

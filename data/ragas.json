@@ -1,0 +1,12 @@
+﻿{
+  "hindustani": {
+    "Yaman": {"thaat":"Kalyan","swaras":"S R G M P D N S","rasa":"Shringara","samay":"Night","valence":0.9,"arousal":0.2,"therapeutic":"Romantic elevation, Heart opening"},
+    "Bhairav": {"thaat":"Bhairav","swaras":"S r G M P d N S","rasa":"Shanti","samay":"Dawn","valence":0.8,"arousal":-0.7,"therapeutic":"Anxiety relief, Morning grounding"},
+    "Shivaranjani": {"thaat":"Kafi","swaras":"S R g P D S","rasa":"Karuna","samay":"Night","valence":-0.6,"arousal":-0.7,"therapeutic":"Grief release, Emotional catharsis"},
+    "Malkauns": {"thaat":"Bhairavi","swaras":"S g M d N S","rasa":"Shanti","samay":"Late Night","valence":0.9,"arousal":-0.9,"therapeutic":"Deep meditation, Transcendence"},
+    "Todi": {"thaat":"Todi","swaras":"S r g M P d N S","rasa":"Karuna","samay":"Morning","valence":-0.6,"arousal":-0.4,"therapeutic":"Trauma processing"},
+    "Bhoopali": {"thaat":"Kalyan","swaras":"S R G P D S","rasa":"Bhakti","samay":"Evening","valence":0.8,"arousal":-0.4,"therapeutic":"Devotion, Spiritual connection"},
+    "Khamaj": {"thaat":"Khamaj","swaras":"S R G M P D N S","rasa":"Hasya","samay":"Evening","valence":0.7,"arousal":0.4,"therapeutic":"Joy, Light-heartedness"},
+    "Darbari": {"thaat":"Asavari","swaras":"S R g M P d N S","rasa":"Veera","samay":"Late Night","valence":0.7,"arousal":-0.6,"therapeutic":"Royal courage, Solitude"}
+  }
+}
